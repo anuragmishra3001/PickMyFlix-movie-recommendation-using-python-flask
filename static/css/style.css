@@ -534,6 +534,18 @@ section h2 {
         display: flex;
     }
     
+    .hamburger.active span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+    
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .hamburger.active span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+    
     .hero h1 {
         font-size: 2.5rem;
     }
@@ -570,6 +582,18 @@ section h2 {
         padding: 6px 12px;
         font-size: 0.9rem;
     }
+    
+    /* Improved mobile menu styling */
+    #mobileMenu {
+        padding: 2rem;
+    }
+    
+    #mobileMenu .nav-link {
+        font-size: 1.25rem;
+        padding: 1rem 0;
+        width: 100%;
+        text-align: center;
+    }
 }
 
 @media (max-width: 480px) {
@@ -599,6 +623,29 @@ section h2 {
         grid-template-columns: 1fr;
         text-align: center;
     }
+    
+    /* Additional mobile improvements */
+    .genre-tag {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+        margin: 2px;
+    }
+    
+    .movie-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .movie-poster {
+        height: 300px;
+    }
+    
+    .movie-info {
+        padding: 1rem;
+    }
+    
+    .movie-title {
+        font-size: 1.1rem;
+    }
 }
 
 /* Loading Animation */
@@ -626,4 +673,4 @@ section h2 {
 /* Smooth Scrolling */
 html {
     scroll-behavior: smooth;
-} 
+}

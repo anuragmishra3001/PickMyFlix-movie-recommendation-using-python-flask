@@ -87,6 +87,15 @@
                 <span class="w-6 h-0.5 bg-primary-light transition-all duration-300"></span>
             </div>
         </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden fixed inset-0 bg-dark-darker bg-opacity-95 backdrop-blur-lg z-40 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-center items-center">
+            <div class="flex flex-col items-center gap-8 text-center">
+                <a href="#home" class="nav-link text-white hover:text-primary-light font-medium tracking-wide uppercase text-lg transition-all duration-300 relative after:absolute after:bottom-[-5px] after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-primary-light after:to-secondary-light after:transition-all after:duration-300 hover:after:w-full hover:shadow-neon">Home</a>
+                <a href="#movies" class="nav-link text-white hover:text-primary-light font-medium tracking-wide uppercase text-lg transition-all duration-300 relative after:absolute after:bottom-[-5px] after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-primary-light after:to-secondary-light after:transition-all after:duration-300 hover:after:w-full hover:shadow-neon">Movies</a>
+                <a href="#recommendations" class="nav-link text-white hover:text-primary-light font-medium tracking-wide uppercase text-lg transition-all duration-300 relative after:absolute after:bottom-[-5px] after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-primary-light after:to-secondary-light after:transition-all after:duration-300 hover:after:w-full hover:shadow-neon">Recommendations</a>
+                <a href="#search" class="nav-link text-white hover:text-primary-light font-medium tracking-wide uppercase text-lg transition-all duration-300 relative after:absolute after:bottom-[-5px] after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-primary-light after:to-secondary-light after:transition-all after:duration-300 hover:after:w-full hover:shadow-neon">Search</a>
+            </div>
+        </div>
     </nav>
 
     <!-- Hero Section -->
@@ -101,14 +110,14 @@
         <!-- Dark overlay -->
         <div class="absolute inset-0 bg-black opacity-50"></div>
         
-        <div class="z-10 max-w-3xl px-4 animate__animated animate__fadeIn animate__slow">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-heading mb-6 bg-gradient-to-r from-primary-light via-accent-yellow to-secondary-light bg-clip-text text-transparent drop-shadow-lg animate__animated animate__fadeInDown animate__delay-1s tracking-tight leading-tight">Discover Your Next Favorite Movie</h1>
-            <p class="text-lg md:text-xl mb-10 animate__animated animate__fadeInUp animate__delay-1s bg-gradient-to-r from-accent-yellow via-white to-accent-purple bg-clip-text text-transparent font-semibold tracking-wide">Get personalized movie recommendations based on your taste and preferences</p>
+        <div class="z-10 max-w-3xl px-4 sm:px-6 animate__animated animate__fadeIn animate__slow">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold font-heading mb-4 sm:mb-6 bg-gradient-to-r from-primary-light via-accent-yellow to-secondary-light bg-clip-text text-transparent drop-shadow-lg animate__animated animate__fadeInDown animate__delay-1s tracking-tight leading-tight">Discover Your Next Favorite Movie</h1>
+            <p class="text-base sm:text-lg md:text-xl mb-6 sm:mb-10 animate__animated animate__fadeInUp animate__delay-1s bg-gradient-to-r from-accent-yellow via-white to-accent-purple bg-clip-text text-transparent font-semibold tracking-wide">Get personalized movie recommendations based on your taste and preferences</p>
             <button 
-                class="bg-gradient-to-r from-primary-light to-secondary-light text-white font-semibold py-4 px-8 rounded-full shadow-neon transform transition-all duration-300 hover:scale-105 hover:shadow-neon-secondary animate__animated animate__bounceIn animate__delay-2s tracking-wide uppercase text-sm" 
+                class="w-full sm:w-auto bg-gradient-to-r from-primary-light to-secondary-light text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-full shadow-neon transform transition-all duration-300 hover:scale-105 hover:shadow-neon-secondary animate__animated animate__bounceIn animate__delay-2s tracking-wide uppercase text-sm" 
                 onclick="scrollToSection('recommendations')"
             >
-                <span class="flex items-center gap-2">
+                <span class="flex items-center justify-center gap-2">
                     <span>Get Recommendations</span>
                     <i class="fas fa-chevron-right text-sm"></i>
                 </span>
@@ -134,27 +143,29 @@
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <h2 class="text-4xl font-bold font-heading text-center mb-12 bg-gradient-to-r from-accent-yellow via-accent-orange to-primary-light bg-clip-text text-transparent animate__animated animate__fadeIn tracking-tight leading-tight">Search Movies</h2>
-            <div class="max-w-2xl mx-auto mb-12 animate__animated animate__fadeInUp animate__delay-1s">
-                <div class="flex items-center bg-dark-darker bg-opacity-80 backdrop-blur-md rounded-full shadow-neon-secondary overflow-hidden p-1 border border-secondary-light">
-                    <i class="fas fa-search text-secondary-light mx-4 text-xl animate-pulse-slow"></i>
-                    <input 
-                        type="text" 
-                        id="searchInput" 
-                        placeholder="Search by title or genre..." 
-                        class="flex-1 py-3 px-4 outline-none bg-transparent text-white text-lg placeholder-gray-400"
-                    >
+            <div class="max-w-2xl mx-auto mb-12 animate__animated animate__fadeInUp animate__delay-1s px-4 sm:px-0">
+                <div class="flex flex-col sm:flex-row items-center bg-dark-darker bg-opacity-80 backdrop-blur-md rounded-2xl sm:rounded-full shadow-neon-secondary overflow-hidden p-3 sm:p-1 border border-secondary-light">
+                    <div class="flex w-full items-center mb-3 sm:mb-0">
+                        <i class="fas fa-search text-secondary-light mx-4 text-xl animate-pulse-slow"></i>
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            placeholder="Search by title or genre..." 
+                            class="flex-1 py-3 px-2 sm:px-4 outline-none bg-transparent text-white text-base sm:text-lg placeholder-gray-400 w-full"
+                        >
+                    </div>
                     <button 
                         id="searchBtn" 
-                        class="bg-gradient-to-r from-secondary-light to-secondary-dark text-white font-semibold py-3 px-6 rounded-full transform transition-all duration-300 hover:scale-105 hover:shadow-neon-secondary uppercase text-sm tracking-wide"
+                        class="w-full sm:w-auto bg-gradient-to-r from-secondary-light to-secondary-dark text-white font-semibold py-3 px-6 rounded-full transform transition-all duration-300 hover:scale-105 hover:shadow-neon-secondary uppercase text-sm tracking-wide"
                     >
-                        <span class="flex items-center gap-2">
+                        <span class="flex items-center justify-center gap-2">
                             <span>Search</span>
                             <i class="fas fa-arrow-right"></i>
                         </span>
                     </button>
                 </div>
             </div>
-            <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-8 transition-all duration-500"></div>
+            <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 px-2 sm:px-0 mt-8 transition-all duration-500"></div>
         </div>
     </section>
 
@@ -168,7 +179,7 @@
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <h2 class="text-4xl font-bold font-heading text-center mb-12 bg-gradient-to-r from-secondary-light via-accent-purple to-primary-light bg-clip-text text-transparent animate__animated animate__fadeIn tracking-tight leading-tight">All Movies</h2>
-            <div id="moviesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 transition-all duration-500"></div>
+            <div id="moviesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 px-2 sm:px-0 transition-all duration-500"></div>
         </div>
     </section>
 
@@ -185,14 +196,14 @@
             <h2 class="text-4xl font-bold font-heading text-center mb-12 bg-gradient-to-r from-accent-yellow via-secondary-light to-accent-purple bg-clip-text text-transparent animate__animated animate__fadeIn tracking-tight leading-tight">Personalized Recommendations</h2>
             <div class="text-center mb-12 animate__animated animate__fadeInUp">
                 <h3 class="text-2xl font-semibold font-heading mb-6 bg-gradient-to-r from-accent-yellow via-white to-accent-purple bg-clip-text text-transparent tracking-tight">Select your favorite genres:</h3>
-                <div class="flex flex-wrap justify-center gap-3 mb-8">
-                    <span class="genre-tag bg-gradient-to-r from-primary-light to-primary-dark text-white px-4 py-2 rounded-full cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-accent-yellow hover:shadow-neon hover:scale-105" data-genre="action">Action</span>
-                    <span class="genre-tag bg-gradient-to-r from-secondary-light to-secondary-dark text-white px-4 py-2 rounded-full cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-accent-yellow hover:shadow-neon hover:scale-105" data-genre="drama">Drama</span>
-                    <span class="genre-tag bg-gradient-to-r from-accent-purple to-primary-dark text-white px-4 py-2 rounded-full cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-accent-yellow hover:shadow-neon hover:scale-105" data-genre="comedy">Comedy</span>
-                    <span class="genre-tag bg-gradient-to-r from-accent-yellow to-secondary-dark text-white px-4 py-2 rounded-full cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-accent-yellow hover:shadow-neon hover:scale-105" data-genre="sci-fi">Sci-Fi</span>
-                    <span class="genre-tag bg-gradient-to-r from-primary-dark to-accent-purple text-white px-4 py-2 rounded-full cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-accent-yellow hover:shadow-neon hover:scale-105" data-genre="crime">Crime</span>
-                    <span class="genre-tag bg-gradient-to-r from-secondary-dark to-primary-light text-white px-4 py-2 rounded-full cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-accent-yellow hover:shadow-neon hover:scale-105" data-genre="adventure">Adventure</span>
-                    <span class="genre-tag bg-gradient-to-r from-accent-purple to-accent-yellow text-white px-4 py-2 rounded-full cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-accent-yellow hover:shadow-neon hover:scale-105" data-genre="romance">Romance</span>
+                <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 px-2 sm:px-0">
+                    <span class="genre-tag bg-gradient-to-r from-primary-light to-primary-dark text-white px-3 py-2 sm:px-4 text-sm sm:text-base rounded-full cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-accent-yellow hover:shadow-neon hover:scale-105" data-genre="action">Action</span>
+                    <span class="genre-tag bg-gradient-to-r from-secondary-light to-secondary-dark text-white px-3 py-2 sm:px-4 text-sm sm:text-base rounded-full cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-accent-yellow hover:shadow-neon hover:scale-105" data-genre="drama">Drama</span>
+                    <span class="genre-tag bg-gradient-to-r from-accent-purple to-primary-dark text-white px-3 py-2 sm:px-4 text-sm sm:text-base rounded-full cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-accent-yellow hover:shadow-neon hover:scale-105" data-genre="comedy">Comedy</span>
+                    <span class="genre-tag bg-gradient-to-r from-accent-yellow to-secondary-dark text-white px-3 py-2 sm:px-4 text-sm sm:text-base rounded-full cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-accent-yellow hover:shadow-neon hover:scale-105" data-genre="sci-fi">Sci-Fi</span>
+                    <span class="genre-tag bg-gradient-to-r from-primary-dark to-accent-purple text-white px-3 py-2 sm:px-4 text-sm sm:text-base rounded-full cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-accent-yellow hover:shadow-neon hover:scale-105" data-genre="crime">Crime</span>
+                    <span class="genre-tag bg-gradient-to-r from-secondary-dark to-primary-light text-white px-3 py-2 sm:px-4 text-sm sm:text-base rounded-full cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-accent-yellow hover:shadow-neon hover:scale-105" data-genre="adventure">Adventure</span>
+                    <span class="genre-tag bg-gradient-to-r from-accent-purple to-accent-yellow text-white px-3 py-2 sm:px-4 text-sm sm:text-base rounded-full cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-accent-yellow hover:shadow-neon hover:scale-105" data-genre="romance">Romance</span>
                 </div>
                 <button 
                     id="getRecommendationsBtn" 
@@ -201,7 +212,7 @@
                     Get Recommendations
                 </button>
             </div>
-            <div id="recommendationsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 transition-all duration-500"></div>
+            <div id="recommendationsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 px-2 sm:px-0 transition-all duration-500"></div>
         </div>
     </section>
 

@@ -68,18 +68,52 @@ function setupEventListeners() {
 
 // Setup responsive navigation
 function setupNavigation() {
+    const mobileMenu = document.getElementById('mobileMenu');
+    
     hamburger.addEventListener('click', function() {
-        navMenu.classList.toggle('active');
-        hamburger.classList.toggle('active');
+        // Toggle mobile menu visibility
+        if (mobileMenu.classList.contains('translate-x-full')) {
+            mobileMenu.classList.remove('translate-x-full');
+            mobileMenu.classList.add('translate-x-0');
+            // Transform hamburger to X
+            hamburger.classList.add('active');
+            hamburger.children[0].classList.add('rotate-45', 'translate-y-2');
+            hamburger.children[1].classList.add('opacity-0');
+            hamburger.children[2].classList.add('-rotate-45', '-translate-y-2');
+            // Prevent body scrolling
+            document.body.style.overflow = 'hidden';
+        } else {
+            closeMobileMenu();
+        }
     });
 
     // Close mobile menu when clicking on a link
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', function() {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
+            closeMobileMenu();
         });
     });
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        if (mobileMenu.classList.contains('translate-x-0') && 
+            !mobileMenu.contains(event.target) && 
+            !hamburger.contains(event.target)) {
+            closeMobileMenu();
+        }
+    });
+    
+    function closeMobileMenu() {
+        mobileMenu.classList.remove('translate-x-0');
+        mobileMenu.classList.add('translate-x-full');
+        // Restore hamburger
+        hamburger.classList.remove('active');
+        hamburger.children[0].classList.remove('rotate-45', 'translate-y-2');
+        hamburger.children[1].classList.remove('opacity-0');
+        hamburger.children[2].classList.remove('-rotate-45', '-translate-y-2');
+        // Restore body scrolling
+        document.body.style.overflow = '';
+    }
 }
 
 // Load all movies
@@ -110,7 +144,7 @@ async function performSearch() {
         displayMovies(movies, searchResults);
         
         if (movies.length === 0) {
-            searchResults.innerHTML = '<div class="text-center py-12 animate__animated animate__fadeIn"><div class="inline-block p-6 rounded-full bg-gradient-to-br from-dark-light to-dark-darker shadow-neon mb-4 border border-accent-purple"><i class="fas fa-film text-accent-yellow text-4xl"></i></div><p class="text-white text-lg font-semibold bg-gradient-to-r from-primary-light to-secondary-light bg-clip-text text-transparent">No movies found matching your search.</p></div>';
+            searchResults.innerHTML = '<div class="text-center py-8 md:py-12 animate__animated animate__fadeIn"><div class="inline-block p-4 md:p-6 rounded-full bg-gradient-to-br from-dark-light to-dark-darker shadow-neon mb-3 md:mb-4 border border-accent-purple"><i class="fas fa-film text-accent-yellow text-2xl md:text-4xl"></i></div><p class="text-white text-base md:text-lg font-semibold bg-gradient-to-r from-primary-light to-secondary-light bg-clip-text text-transparent">No movies found matching your search.</p></div>';
         }
     } catch (error) {
         console.error('Error searching movies:', error);
@@ -152,7 +186,7 @@ async function getRecommendations() {
 // Display movies in a grid
 function displayMovies(movies, container) {
     if (!movies || movies.length === 0) {
-        container.innerHTML = '<div class="text-center py-12 animate__animated animate__fadeIn"><div class="inline-block p-6 rounded-full bg-gradient-to-br from-dark-light to-dark-darker shadow-neon mb-4 border border-accent-purple"><i class="fas fa-film text-accent-yellow text-4xl"></i></div><p class="text-white text-lg font-semibold bg-gradient-to-r from-primary-light to-secondary-light bg-clip-text text-transparent">No movies found.</p></div>';
+        container.innerHTML = '<div class="text-center py-8 md:py-12 animate__animated animate__fadeIn"><div class="inline-block p-4 md:p-6 rounded-full bg-gradient-to-br from-dark-light to-dark-darker shadow-neon mb-3 md:mb-4 border border-accent-purple"><i class="fas fa-film text-accent-yellow text-2xl md:text-4xl"></i></div><p class="text-white text-base md:text-lg font-semibold bg-gradient-to-r from-primary-light to-secondary-light bg-clip-text text-transparent">No movies found.</p></div>';
         return;
     }
 
@@ -187,18 +221,18 @@ function createMovieCard(movie) {
     return `
         <div class="movie-card bg-gradient-to-br from-dark-light to-dark-darker text-white rounded-xl overflow-hidden shadow-neon transition-all duration-300 hover:shadow-xl hover:scale-105 animate__animated animate__fadeIn border border-accent-purple" data-movie-id="${movie.id}">
             <div class="relative overflow-hidden">
-                <img src="${movie.poster}" alt="${movie.title}" class="w-full h-80 object-cover transition-transform duration-700 hover:scale-110">
+                <img src="${movie.poster}" alt="${movie.title}" class="w-full h-60 sm:h-72 md:h-80 object-cover transition-transform duration-700 hover:scale-110">
                 <div class="absolute inset-0 bg-gradient-to-t from-dark-darker to-transparent opacity-60"></div>
-                <div class="absolute bottom-0 left-0 right-0 p-4">
+                <div class="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
                     <div class="flex items-center gap-1 text-accent-yellow mb-1">
                         <i class="fas fa-star"></i>
                         <span class="font-medium">${movie.rating}</span>
                     </div>
                 </div>
             </div>
-            <div class="p-5">
-                <h3 class="text-xl font-semibold mb-2 bg-gradient-to-r from-primary-light via-accent-yellow to-secondary-light bg-clip-text text-transparent">${movie.title}</h3>
-                <div class="mb-3 text-sm text-gray-300">
+            <div class="p-3 sm:p-5">
+                <h3 class="text-lg sm:text-xl font-semibold mb-1 sm:mb-2 bg-gradient-to-r from-primary-light via-accent-yellow to-secondary-light bg-clip-text text-transparent">${movie.title}</h3>
+                <div class="mb-2 sm:mb-3 text-xs sm:text-sm text-gray-300">
                     <span>${movie.year}</span>
                 </div>
                 <div class="flex flex-wrap">
@@ -250,32 +284,32 @@ function createModalContent(movie) {
     }).join('');
 
     return `
-        <div class="flex flex-col md:flex-row gap-6 animate__animated animate__fadeIn">
-            <div class="relative">
-                <img src="${movie.poster}" alt="${movie.title}" class="w-full md:w-64 h-96 object-cover rounded-lg shadow-neon border border-accent-purple">
+        <div class="flex flex-col md:flex-row gap-4 md:gap-6 animate__animated animate__fadeIn">
+            <div class="relative mx-auto md:mx-0" style="max-width: 250px;">
+                <img src="${movie.poster}" alt="${movie.title}" class="w-full md:w-64 h-auto object-cover rounded-lg shadow-neon border border-accent-purple">
                 <div class="absolute inset-0 bg-gradient-to-t from-dark-darker to-transparent opacity-30 rounded-lg"></div>
             </div>
             <div class="flex-1">
-                <h3 class="text-2xl font-bold mb-3 bg-gradient-to-r from-primary-light via-accent-yellow to-secondary-light bg-clip-text text-transparent">${movie.title}</h3>
-                <div class="flex justify-between items-center mb-4 text-gray-300">
-                    <span class="text-lg">${movie.year}</span>
+                <h3 class="text-xl md:text-2xl font-bold mb-2 md:mb-3 bg-gradient-to-r from-primary-light via-accent-yellow to-secondary-light bg-clip-text text-transparent">${movie.title}</h3>
+                <div class="flex justify-between items-center mb-3 md:mb-4 text-gray-300">
+                    <span class="text-base md:text-lg">${movie.year}</span>
                     <div class="flex items-center gap-1 text-accent-yellow">
                         <i class="fas fa-star"></i>
                         <span class="font-medium">${movie.rating}</span>
                     </div>
                 </div>
-                <div class="flex flex-wrap mb-4">
+                <div class="flex flex-wrap mb-3 md:mb-4">
                     ${genresHTML}
                 </div>
-                <p class="text-gray-300 mb-6 leading-relaxed">${movie.description}</p>
-                <div class="bg-gradient-to-br from-dark-light to-dark-darker p-4 rounded-lg border border-accent-purple shadow-neon-sm">
-                    <h4 class="text-lg font-semibold mb-3 bg-gradient-to-r from-accent-purple to-accent-yellow bg-clip-text text-transparent">Rate this movie:</h4>
-                    <div class="rating-stars flex gap-2" data-movie-id="${movie.id}">
-                        <i class="fas fa-star star text-2xl text-gray-600 hover:text-accent-yellow transition-colors duration-200 cursor-pointer" data-rating="1"></i>
-                        <i class="fas fa-star star text-2xl text-gray-600 hover:text-accent-yellow transition-colors duration-200 cursor-pointer" data-rating="2"></i>
-                        <i class="fas fa-star star text-2xl text-gray-600 hover:text-accent-yellow transition-colors duration-200 cursor-pointer" data-rating="3"></i>
-                        <i class="fas fa-star star text-2xl text-gray-600 hover:text-accent-yellow transition-colors duration-200 cursor-pointer" data-rating="4"></i>
-                        <i class="fas fa-star star text-2xl text-gray-600 hover:text-accent-yellow transition-colors duration-200 cursor-pointer" data-rating="5"></i>
+                <p class="text-gray-300 mb-4 md:mb-6 leading-relaxed text-sm md:text-base">${movie.description}</p>
+                <div class="bg-gradient-to-br from-dark-light to-dark-darker p-3 md:p-4 rounded-lg border border-accent-purple shadow-neon-sm">
+                    <h4 class="text-base md:text-lg font-semibold mb-2 md:mb-3 bg-gradient-to-r from-accent-purple to-accent-yellow bg-clip-text text-transparent">Rate this movie:</h4>
+                    <div class="rating-stars flex gap-1 md:gap-2" data-movie-id="${movie.id}">
+                        <i class="fas fa-star star text-xl md:text-2xl text-gray-600 hover:text-accent-yellow transition-colors duration-200 cursor-pointer" data-rating="1"></i>
+                        <i class="fas fa-star star text-xl md:text-2xl text-gray-600 hover:text-accent-yellow transition-colors duration-200 cursor-pointer" data-rating="2"></i>
+                        <i class="fas fa-star star text-xl md:text-2xl text-gray-600 hover:text-accent-yellow transition-colors duration-200 cursor-pointer" data-rating="3"></i>
+                        <i class="fas fa-star star text-xl md:text-2xl text-gray-600 hover:text-accent-yellow transition-colors duration-200 cursor-pointer" data-rating="4"></i>
+                        <i class="fas fa-star star text-xl md:text-2xl text-gray-600 hover:text-accent-yellow transition-colors duration-200 cursor-pointer" data-rating="5"></i>
                     </div>
                 </div>
             </div>
@@ -356,8 +390,8 @@ function closeMovieModal() {
 // Show loading spinner
 function showLoading(container) {
     container.innerHTML = `
-        <div class="flex justify-center items-center py-12 animate__animated animate__fadeIn">
-            <div class="w-16 h-16 border-4 border-accent-yellow border-t-transparent border-b-accent-purple rounded-full animate-spin shadow-neon"></div>
+        <div class="flex justify-center items-center py-8 md:py-12 animate__animated animate__fadeIn">
+            <div class="w-12 h-12 md:w-16 md:h-16 border-4 border-accent-yellow border-t-transparent border-b-accent-purple rounded-full animate-spin shadow-neon"></div>
         </div>
     `;
 }
@@ -365,11 +399,11 @@ function showLoading(container) {
 // Show error message
 function showError(container, message) {
     container.innerHTML = `
-        <div class="text-center py-12 animate__animated animate__fadeIn">
-            <div class="inline-block p-6 rounded-full bg-gradient-to-br from-red-500 to-red-700 shadow-neon mb-4">
-                <i class="fas fa-exclamation-circle text-white text-4xl"></i>
+        <div class="text-center py-8 md:py-12 animate__animated animate__fadeIn">
+            <div class="inline-block p-4 md:p-6 rounded-full bg-gradient-to-br from-red-500 to-red-700 shadow-neon mb-3 md:mb-4">
+                <i class="fas fa-exclamation-circle text-white text-2xl md:text-4xl"></i>
             </div>
-            <p class="text-red-400 text-lg font-semibold">${message}</p>
+            <p class="text-red-400 text-base md:text-lg font-semibold">${message}</p>
         </div>
     `;
 }
@@ -377,11 +411,11 @@ function showError(container, message) {
 // Show notification
 function showNotification(message, type) {
     const notification = document.createElement('div');
-    notification.className = `fixed top-5 right-5 px-6 py-3 rounded-lg text-white font-semibold shadow-neon z-50 animate__animated animate__fadeInRight ${type === 'success' ? 'bg-gradient-to-r from-primary-light to-secondary-light border border-accent-yellow' : 'bg-gradient-to-r from-red-500 to-red-700 border border-red-300'}`;
+    notification.className = `fixed top-3 md:top-5 right-3 md:right-5 px-4 md:px-6 py-2 md:py-3 rounded-lg text-white text-sm md:text-base font-semibold shadow-neon z-50 animate__animated animate__fadeInRight ${type === 'success' ? 'bg-gradient-to-r from-primary-light to-secondary-light border border-accent-yellow' : 'bg-gradient-to-r from-red-500 to-red-700 border border-red-300'}`;
     
     // Add icon and message
     notification.innerHTML = `
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2 md:gap-3">
             <i class="fas ${type === 'success' ? 'fa-check-circle text-accent-yellow' : 'fa-exclamation-circle text-red-300'}"></i>
             <span>${message}</span>
         </div>
