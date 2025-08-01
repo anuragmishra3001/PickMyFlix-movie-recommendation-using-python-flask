@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, Response
 from flask_cors import CORS
 import json
 import random
@@ -15,7 +15,7 @@ MOVIES_DATA = [
         "genre": ["Drama"],
         "year": 1994,
         "rating": 9.3,
-        "poster": "/static/images/posters/the_shawshank_redemption.jpg",
+        "poster": "/static/images/posters/the_shawshank_redemption_1994.svg",
         "description": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency."
     },
     {
@@ -86,6 +86,10 @@ MOVIES_DATA = [
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/debug')
+def debug():
+    return render_template('debug.html')
 
 @app.route('/api/movies')
 def get_movies():
@@ -159,6 +163,12 @@ def add_rating():
         "rating": rating,
         "timestamp": datetime.now().isoformat()
     })
+
+@app.route('/@vite/client', methods=['GET'])
+def vite_client():
+    """Handle Vite client requests to prevent 404 errors"""
+    # Return an empty JavaScript file with appropriate headers
+    return Response('', mimetype='application/javascript')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
