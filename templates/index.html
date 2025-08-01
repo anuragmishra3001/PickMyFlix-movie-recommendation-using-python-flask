@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieFlix - Movie Recommendations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            light: '#FF4D8F', // Vibrant pink
+                            DEFAULT: '#FF2D55', // Hot pink
+                            dark: '#D81B60', // Deep pink
+                        },
+                        secondary: {
+                            light: '#36D1DC', // Light teal
+                            DEFAULT: '#5B86E5', // Bright blue
+                            dark: '#3A1C71', // Deep purple
+                        },
+                        accent: {
+                            yellow: '#FFD166', // Bright yellow
+                            green: '#06D6A0', // Mint green
+                            purple: '#9D4EDD', // Vibrant purple
+                            orange: '#FF9E00', // Bright orange
+                        },
+                        dark: {
+                            light: '#2D3748',
+                            DEFAULT: '#1A202C',
+                            darker: '#171923',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'Montserrat', 'sans-serif'],
+                        heading: ['Outfit', 'Montserrat', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-slow': 'bounce 3s infinite',
+                        'shimmer': 'shimmer 2s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' },
+                        }
+                    },
+                    boxShadow: {
+                        'neon': '0 0 5px theme("colors.primary.light"), 0 0 20px theme("colors.primary.light")',
+                        'neon-secondary': '0 0 5px theme("colors.secondary.light"), 0 0 20px theme("colors.secondary.light")',
+                        'neon-accent': '0 0 5px theme("colors.accent.purple"), 0 0 20px theme("colors.accent.purple")',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="font-sans bg-gradient-to-br from-secondary-dark via-dark-light to-dark-darker min-h-screen text-white tracking-wide">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-dark-darker bg-opacity-80 backdrop-blur-lg z-50 shadow-neon transition-all duration-300 ease-in-out border-b border-primary-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-3 animate__animated animate__fadeIn">
+                <i class="fas fa-film text-3xl text-primary-light animate-pulse-slow"></i>
+                <span class="text-2xl font-bold font-heading bg-gradient-to-r from-primary-light to-secondary-light bg-clip-text text-transparent tracking-wider">MovieFlix</span>
+            </div>
+            <div class="hidden md:flex gap-8">
+                <a href="#home" class="nav-link active text-white hover:text-primary-light font-medium tracking-wide uppercase text-sm transition-all duration-300 relative after:absolute after:bottom-[-5px] after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-primary-light after:to-secondary-light after:transition-all after:duration-300 hover:after:w-full hover:shadow-neon">Home</a>
+                <a href="#movies" class="nav-link text-white hover:text-primary-light font-medium tracking-wide uppercase text-sm transition-all duration-300 relative after:absolute after:bottom-[-5px] after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-primary-light after:to-secondary-light after:transition-all after:duration-300 hover:after:w-full hover:shadow-neon">Movies</a>
+                <a href="#recommendations" class="nav-link text-white hover:text-primary-light font-medium tracking-wide uppercase text-sm transition-all duration-300 relative after:absolute after:bottom-[-5px] after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-primary-light after:to-secondary-light after:transition-all after:duration-300 hover:after:w-full hover:shadow-neon">Recommendations</a>
+                <a href="#search" class="nav-link text-white hover:text-primary-light font-medium tracking-wide uppercase text-sm transition-all duration-300 relative after:absolute after:bottom-[-5px] after:left-0 after:h-0.5 after:w-0 after:bg-gradient-to-r after:from-primary-light after:to-secondary-light after:transition-all after:duration-300 hover:after:w-full hover:shadow-neon">Search</a>
+            </div>
+            <div class="md:hidden flex flex-col gap-1.5 cursor-pointer hamburger">
+                <span class="w-6 h-0.5 bg-primary-light transition-all duration-300"></span>
+                <span class="w-6 h-0.5 bg-primary-light transition-all duration-300"></span>
+                <span class="w-6 h-0.5 bg-primary-light transition-all duration-300"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center text-center relative overflow-hidden pt-20 bg-gradient-to-br from-black via-dark-darker to-dark-light">
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 overflow-hidden opacity-15">
+            <div class="absolute top-1/4 left-1/4 w-64 h-64 rounded-full bg-primary-light blur-3xl animate-float"></div>
+            <div class="absolute top-3/4 right-1/4 w-96 h-96 rounded-full bg-secondary-light blur-3xl animate-pulse-slow"></div>
+            <div class="absolute bottom-1/4 left-1/2 w-48 h-48 rounded-full bg-accent-purple blur-3xl animate-bounce-slow"></div>
+            <div class="absolute top-1/2 right-1/3 w-72 h-72 rounded-full bg-accent-yellow blur-3xl animate-pulse-slow opacity-30"></div>
+        </div>
+        <!-- Dark overlay -->
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        
+        <div class="z-10 max-w-3xl px-4 animate__animated animate__fadeIn animate__slow">
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold font-heading mb-6 bg-gradient-to-r from-primary-light via-accent-yellow to-secondary-light bg-clip-text text-transparent drop-shadow-lg animate__animated animate__fadeInDown animate__delay-1s tracking-tight leading-tight">Discover Your Next Favorite Movie</h1>
+            <p class="text-lg md:text-xl mb-10 animate__animated animate__fadeInUp animate__delay-1s bg-gradient-to-r from-accent-yellow via-white to-accent-purple bg-clip-text text-transparent font-semibold tracking-wide">Get personalized movie recommendations based on your taste and preferences</p>
+            <button 
+                class="bg-gradient-to-r from-primary-light to-secondary-light text-white font-semibold py-4 px-8 rounded-full shadow-neon transform transition-all duration-300 hover:scale-105 hover:shadow-neon-secondary animate__animated animate__bounceIn animate__delay-2s tracking-wide uppercase text-sm" 
+                onclick="scrollToSection('recommendations')"
+            >
+                <span class="flex items-center gap-2">
+                    <span>Get Recommendations</span>
+                    <i class="fas fa-chevron-right text-sm"></i>
+                </span>
+            </button>
+        </div>
+        <div class="absolute top-0 left-0 w-full h-full">
+            <div class="absolute w-full h-full">
+                <div class="absolute top-1/4 left-1/6 w-40 h-60 bg-gradient-to-br from-dark-darker to-black bg-opacity-80 rounded-xl backdrop-blur-md animate-float shadow-neon border border-primary-light transform rotate-3"></div>
+                <div class="absolute top-2/3 right-1/6 w-40 h-60 bg-gradient-to-br from-dark-darker to-black bg-opacity-80 rounded-xl backdrop-blur-md animate-float delay-1000 shadow-neon-secondary border border-secondary-light transform -rotate-6"></div>
+                <div class="absolute bottom-1/4 left-1/4 w-40 h-60 bg-gradient-to-br from-dark-darker to-black bg-opacity-80 rounded-xl backdrop-blur-md animate-float delay-2000 shadow-neon border border-accent-purple transform rotate-12"></div>
+                <div class="absolute top-1/3 right-1/4 w-40 h-60 bg-gradient-to-br from-dark-darker to-black bg-opacity-80 rounded-xl backdrop-blur-md animate-float delay-3000 shadow-neon-accent border border-accent-yellow transform -rotate-12"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section id="search" class="py-20 bg-gradient-to-br from-dark-darker to-dark-light relative overflow-hidden">
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 overflow-hidden opacity-10">
+            <div class="absolute top-1/3 right-1/3 w-72 h-72 rounded-full bg-accent-green blur-3xl animate-pulse-slow"></div>
+            <div class="absolute bottom-1/3 left-1/3 w-80 h-80 rounded-full bg-accent-orange blur-3xl animate-float"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <h2 class="text-4xl font-bold font-heading text-center mb-12 bg-gradient-to-r from-accent-yellow via-accent-orange to-primary-light bg-clip-text text-transparent animate__animated animate__fadeIn tracking-tight leading-tight">Search Movies</h2>
+            <div class="max-w-2xl mx-auto mb-12 animate__animated animate__fadeInUp animate__delay-1s">
+                <div class="flex items-center bg-dark-darker bg-opacity-80 backdrop-blur-md rounded-full shadow-neon-secondary overflow-hidden p-1 border border-secondary-light">
+                    <i class="fas fa-search text-secondary-light mx-4 text-xl animate-pulse-slow"></i>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Search by title or genre..." 
+                        class="flex-1 py-3 px-4 outline-none bg-transparent text-white text-lg placeholder-gray-400"
+                    >
+                    <button 
+                        id="searchBtn" 
+                        class="bg-gradient-to-r from-secondary-light to-secondary-dark text-white font-semibold py-3 px-6 rounded-full transform transition-all duration-300 hover:scale-105 hover:shadow-neon-secondary uppercase text-sm tracking-wide"
+                    >
+                        <span class="flex items-center gap-2">
+                            <span>Search</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                    </button>
+                </div>
+            </div>
+            <div id="searchResults" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-8 transition-all duration-500"></div>
+        </div>
+    </section>
+
+    <!-- All Movies Section -->
+    <section id="movies" class="py-20 bg-gradient-to-br from-dark-light to-dark-darker relative overflow-hidden">
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 overflow-hidden opacity-10">
+            <div class="absolute top-1/4 right-1/4 w-64 h-64 rounded-full bg-accent-purple blur-3xl animate-float"></div>
+            <div class="absolute bottom-1/4 left-1/4 w-72 h-72 rounded-full bg-primary-light blur-3xl animate-pulse-slow"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <h2 class="text-4xl font-bold font-heading text-center mb-12 bg-gradient-to-r from-secondary-light via-accent-purple to-primary-light bg-clip-text text-transparent animate__animated animate__fadeIn tracking-tight leading-tight">All Movies</h2>
+            <div id="moviesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 transition-all duration-500"></div>
+        </div>
+    </section>
+
+    <!-- Recommendations Section -->
+    <section id="recommendations" class="py-20 bg-gradient-to-br from-secondary-dark to-dark-darker relative overflow-hidden text-white">
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 overflow-hidden opacity-10">
+            <div class="absolute top-1/3 left-1/3 w-80 h-80 rounded-full bg-secondary-light blur-3xl animate-float"></div>
+            <div class="absolute bottom-1/3 right-1/3 w-64 h-64 rounded-full bg-accent-yellow blur-3xl animate-pulse-slow"></div>
+            <div class="absolute top-2/3 right-1/4 w-48 h-48 rounded-full bg-accent-purple blur-3xl animate-bounce-slow"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <h2 class="text-4xl font-bold font-heading text-center mb-12 bg-gradient-to-r from-accent-yellow via-secondary-light to-accent-purple bg-clip-text text-transparent animate__animated animate__fadeIn tracking-tight leading-tight">Personalized Recommendations</h2>
+            <div class="text-center mb-12 animate__animated animate__fadeInUp">
+                <h3 class="text-2xl font-semibold font-heading mb-6 bg-gradient-to-r from-accent-yellow via-white to-accent-purple bg-clip-text text-transparent tracking-tight">Select your favorite genres:</h3>
+                <div class="flex flex-wrap justify-center gap-3 mb-8">
+                    <span class="genre-tag bg-gradient-to-r from-primary-light to-primary-dark text-white px-4 py-2 rounded-full cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-accent-yellow hover:shadow-neon hover:scale-105" data-genre="action">Action</span>
+                    <span class="genre-tag bg-gradient-to-r from-secondary-light to-secondary-dark text-white px-4 py-2 rounded-full cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-accent-yellow hover:shadow-neon hover:scale-105" data-genre="drama">Drama</span>
+                    <span class="genre-tag bg-gradient-to-r from-accent-purple to-primary-dark text-white px-4 py-2 rounded-full cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-accent-yellow hover:shadow-neon hover:scale-105" data-genre="comedy">Comedy</span>
+                    <span class="genre-tag bg-gradient-to-r from-accent-yellow to-secondary-dark text-white px-4 py-2 rounded-full cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-accent-yellow hover:shadow-neon hover:scale-105" data-genre="sci-fi">Sci-Fi</span>
+                    <span class="genre-tag bg-gradient-to-r from-primary-dark to-accent-purple text-white px-4 py-2 rounded-full cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-accent-yellow hover:shadow-neon hover:scale-105" data-genre="crime">Crime</span>
+                    <span class="genre-tag bg-gradient-to-r from-secondary-dark to-primary-light text-white px-4 py-2 rounded-full cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-accent-yellow hover:shadow-neon hover:scale-105" data-genre="adventure">Adventure</span>
+                    <span class="genre-tag bg-gradient-to-r from-accent-purple to-accent-yellow text-white px-4 py-2 rounded-full cursor-pointer transition-all duration-300 border-2 border-transparent hover:border-accent-yellow hover:shadow-neon hover:scale-105" data-genre="romance">Romance</span>
+                </div>
+                <button 
+                    id="getRecommendationsBtn" 
+                    class="bg-gradient-to-r from-accent-yellow via-accent-purple to-secondary-light text-white font-semibold py-3 px-8 rounded-full shadow-neon transform transition-all duration-300 hover:scale-105 hover:shadow-xl hover:from-secondary-light hover:via-accent-purple hover:to-accent-yellow animate__animated animate__pulse animate__infinite animate__slower uppercase text-sm tracking-wide"
+                >
+                    Get Recommendations
+                </button>
+            </div>
+            <div id="recommendationsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 transition-all duration-500"></div>
+        </div>
+    </section>
+
+    <!-- Movie Modal -->
+    <div id="movieModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-80 backdrop-blur-sm flex items-center justify-center">
+        <div class="bg-gradient-to-br from-dark-light to-dark-darker text-white rounded-2xl max-w-3xl w-11/12 max-h-[90vh] overflow-y-auto p-6 md:p-8 relative animate__animated animate__zoomIn animate__faster border-2 border-accent-purple shadow-neon">
+            <span class="absolute right-6 top-6 text-3xl font-heading text-accent-yellow hover:text-accent-purple cursor-pointer transition-colors duration-300 close">&times;</span>
+            <div id="modalContent" class="mt-4 tracking-wide"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-br from-dark-darker to-black text-white py-12 relative overflow-hidden">
+        <!-- Animated background elements -->
+        <div class="absolute inset-0 overflow-hidden opacity-5">
+            <div class="absolute bottom-0 left-1/4 w-64 h-64 rounded-full bg-primary-light blur-3xl animate-pulse-slow"></div>
+            <div class="absolute top-0 right-1/4 w-48 h-48 rounded-full bg-secondary-light blur-3xl animate-float"></div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                <div class="animate__animated animate__fadeIn">
+                    <h3 class="text-2xl font-bold font-heading bg-gradient-to-r from-primary-light to-secondary-light bg-clip-text text-transparent mb-4 tracking-tight">MovieFlix</h3>
+                    <p class="text-gray-300 tracking-wide">Your personal movie recommendation engine</p>
+                </div>
+                <div class="animate__animated animate__fadeIn animate__delay-1s">
+                    <h4 class="text-xl font-semibold font-heading bg-gradient-to-r from-secondary-light to-accent-purple bg-clip-text text-transparent mb-4 tracking-tight">Features</h4>
+                    <ul class="space-y-2 text-gray-300 tracking-wide">
+                        <li class="hover:text-accent-yellow transition-colors duration-300">Movie Search</li>
+                        <li class="hover:text-accent-yellow transition-colors duration-300">Personalized Recommendations</li>
+                        <li class="hover:text-accent-yellow transition-colors duration-300">Movie Ratings</li>
+                        <li class="hover:text-accent-yellow transition-colors duration-300">Genre-based Filtering</li>
+                    </ul>
+                </div>
+                <div class="animate__animated animate__fadeIn animate__delay-2s">
+                    <h4 class="text-xl font-semibold font-heading bg-gradient-to-r from-accent-purple to-accent-yellow bg-clip-text text-transparent mb-4 tracking-tight">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-2xl hover:text-accent-yellow transition-all duration-300 transform hover:scale-125 hover:shadow-neon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-2xl hover:text-accent-purple transition-all duration-300 transform hover:scale-125 hover:shadow-neon"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-2xl hover:text-secondary-light transition-all duration-300 transform hover:scale-125 hover:shadow-neon"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-gray-700 text-center text-gray-400">
+                <p class="animate-shimmer tracking-wide text-sm">&copy; 2024 MovieFlix. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    
+    <!-- Add animation observer for scroll animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Intersection Observer for animations on scroll
+            const animateOnScroll = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate__animated');
+                        entry.target.classList.add(entry.target.dataset.animation || 'animate__fadeIn');
+                        animateOnScroll.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            // Apply to section headings and other elements
+            document.querySelectorAll('section h2, .genre-selector, .search-container').forEach(el => {
+                animateOnScroll.observe(el);
+            });
+            
+            // Add hover animations to movie cards (will be applied by JavaScript)
+            document.addEventListener('DOMContentLoaded', function() {
+                const addHoverEffects = () => {
+                    document.querySelectorAll('.movie-card').forEach(card => {
+                        card.classList.add('transform', 'transition-all', 'duration-300', 'hover:scale-105', 'hover:shadow-xl');
+                    });
+                };
+                
+                // Apply initially and observe for new cards
+                addHoverEffects();
+                const observer = new MutationObserver(addHoverEffects);
+                observer.observe(document.body, { childList: true, subtree: true });
+            });
+        });
+    </script>
+</body>
+</html>
