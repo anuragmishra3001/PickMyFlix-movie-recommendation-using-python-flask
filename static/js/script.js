@@ -16,7 +16,7 @@ const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
 // API base URL
-const API_BASE = 'http://localhost:5000/api';
+const API_BASE = '/api';
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {

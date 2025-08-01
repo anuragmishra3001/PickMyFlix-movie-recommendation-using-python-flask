@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "index.py",
+      "use": "@vercel/python",
+      "config": { 
+        "maxLambdaSize": "15mb",
+        "runtime": "python3.9",
+        "buildCommand": "pip install -r requirements-vercel.txt"
+      }
+    },
+    {
+      "src": "api/*.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.py"
+    }
+  ],
+  "env": {
+    "PYTHONUNBUFFERED": "1"
+  }
+}

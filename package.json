@@ -1,0 +1,20 @@
+{
+  "name": "pickmyflix",
+  "version": "1.0.0",
+  "description": "Movie recommendation system",
+  "main": "vercel.app.js",
+  "scripts": {
+    "start": "python index.py",
+    "build": "echo 'Build completed'"
+  },
+  "engines": {
+    "node": "18.x"
+  },
+  "keywords": [
+    "movies",
+    "recommendations",
+    "flask"
+  ],
+  "author": "",
+  "license": "MIT"
+}
