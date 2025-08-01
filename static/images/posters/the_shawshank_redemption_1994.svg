@@ -1,0 +1,49 @@
+<svg width="300" height="450" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background -->
+    <rect width="300" height="450" fill="#336699"/>
+    
+    <!-- Pattern elements -->
+    <circle cx="130" cy="86" r="81" fill="#FF4D8F" opacity="0.20886736835442404"/>
+    <circle cx="100" cy="342" r="98" fill="#FF4D8F" opacity="0.2866430392541218"/>
+    <circle cx="78" cy="385" r="81" fill="#FF4D8F" opacity="0.14006514056608246"/>
+    <circle cx="233" cy="10" r="45" fill="#FF4D8F" opacity="0.24223028397682253"/>
+    <circle cx="298" cy="306" r="53" fill="#FF4D8F" opacity="0.22304619957528124"/>
+    <circle cx="244" cy="45" r="87" fill="#FF4D8F" opacity="0.12434879719760945"/>
+    <circle cx="293" cy="208" r="55" fill="#FF4D8F" opacity="0.29065145526152414"/>
+    <circle cx="190" cy="0" r="51" fill="#FF4D8F" opacity="0.10833795518947908"/>
+    <circle cx="264" cy="190" r="91" fill="#FF4D8F" opacity="0.11311555973099696"/>
+    <circle cx="114" cy="106" r="76" fill="#FF4D8F" opacity="0.14321659834130426"/>
+    
+    <!-- Gradient overlay -->
+    <rect width="300" height="450" fill="url(#grad)" opacity="0.7"/>
+    
+    <!-- Definitions -->
+    <defs>
+        <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#FF4D8F;stop-opacity:0.3" />
+            <stop offset="100%" style="stop-color:#336699;stop-opacity:0.9" />
+        </linearGradient>
+    </defs>
+    
+    <!-- Movie title -->
+    <text x="150" y="200" font-family="Arial" font-size="28" font-weight="bold" fill="white" text-anchor="middle">The</text>
+    <text x="150" y="240" font-family="Arial" font-size="28" font-weight="bold" fill="white" text-anchor="middle">Shawshank Redemption</text>
+    
+    <!-- Year -->
+    <text x="150" y="280" font-family="Arial" font-size="20" fill="#FF4D8F" text-anchor="middle">1994</text>
+    
+    <!-- Decorative elements -->
+    <rect x="50" y="320" width="200" height="2" fill="#FF4D8F" opacity="0.8"/>
+    <rect x="75" y="330" width="150" height="1" fill="#FF4D8F" opacity="0.6"/>
+    
+    <!-- Rating stars placeholder -->
+    <g transform="translate(125, 360)">
+        <path d="M10,0 L13,6 L20,7 L15,12 L16,20 L10,16 L4,20 L5,12 L0,7 L7,6 Z" fill="#FF4D8F"/>
+    </g>
+    <g transform="translate(150, 360)">
+        <path d="M10,0 L13,6 L20,7 L15,12 L16,20 L10,16 L4,20 L5,12 L0,7 L7,6 Z" fill="#FF4D8F"/>
+    </g>
+    <g transform="translate(175, 360)">
+        <path d="M10,0 L13,6 L20,7 L15,12 L16,20 L10,16 L4,20 L5,12 L0,7 L7,6 Z" fill="#FF4D8F"/>
+    </g>
+</svg>

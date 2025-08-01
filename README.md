@@ -1,4 +1,4 @@
-# MovieFlix - Movie Recommendation System
+# PickMyFlix - Movie Recommendation System
 
 A modern, full-stack movie recommendation website built with HTML, CSS, JavaScript (frontend) and Python Flask (backend). Features a beautiful, mobile-responsive design with personalized movie recommendations.
 
@@ -216,4 +216,4 @@ This project is open source and available under the MIT License.
 
 ---
 
-**Enjoy discovering your next favorite movie! 🎬✨** 
+**Enjoy discovering your next favorite movie! 🎬✨**

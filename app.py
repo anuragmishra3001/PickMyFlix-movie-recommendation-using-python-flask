@@ -15,7 +15,7 @@ MOVIES_DATA = [
         "genre": ["Drama"],
         "year": 1994,
         "rating": 9.3,
-        "poster": "/static/images/shawshank.svg",
+        "poster": "/static/images/posters/the_shawshank_redemption.jpg",
         "description": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency."
     },
     {
@@ -24,7 +24,7 @@ MOVIES_DATA = [
         "genre": ["Crime", "Drama"],
         "year": 1972,
         "rating": 9.2,
-        "poster": "/static/images/godfather.svg",
+        "poster": "/static/images/posters/the_godfather_1972.svg",
         "description": "The aging patriarch of an organized crime dynasty transfers control to his reluctant son."
     },
     {
@@ -33,7 +33,7 @@ MOVIES_DATA = [
         "genre": ["Crime", "Drama"],
         "year": 1994,
         "rating": 8.9,
-        "poster": "/static/images/pulp-fiction.svg",
+        "poster": "/static/images/posters/pulp_fiction_1994.svg",
         "description": "The lives of two mob hitmen, a boxer, a gangster and his wife intertwine in four tales of violence and redemption."
     },
     {
@@ -42,7 +42,7 @@ MOVIES_DATA = [
         "genre": ["Action", "Crime", "Drama"],
         "year": 2008,
         "rating": 9.0,
-        "poster": "/static/images/dark-knight.svg",
+        "poster": "/static/images/posters/the_dark_knight_2008.svg",
         "description": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham."
     },
     {
@@ -51,7 +51,7 @@ MOVIES_DATA = [
         "genre": ["Action", "Adventure", "Sci-Fi"],
         "year": 2010,
         "rating": 8.8,
-        "poster": "/static/images/inception.svg",
+        "poster": "/static/images/posters/inception_2010.svg",
         "description": "A thief who steals corporate secrets through dream-sharing technology is given the inverse task of planting an idea."
     },
     {
@@ -60,7 +60,7 @@ MOVIES_DATA = [
         "genre": ["Adventure", "Drama", "Sci-Fi"],
         "year": 2014,
         "rating": 8.6,
-        "poster": "/static/images/interstellar.svg",
+        "poster": "/static/images/posters/interstellar_2014.svg",
         "description": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival."
     },
     {
@@ -69,7 +69,7 @@ MOVIES_DATA = [
         "genre": ["Action", "Sci-Fi"],
         "year": 1999,
         "rating": 8.7,
-        "poster": "/static/images/matrix.svg",
+        "poster": "/static/images/posters/the_matrix_1999.svg",
         "description": "A computer programmer discovers that reality as he knows it is a simulation created by machines."
     },
     {
@@ -78,7 +78,7 @@ MOVIES_DATA = [
         "genre": ["Drama", "Romance"],
         "year": 1994,
         "rating": 8.8,
-        "poster": "/static/images/forrest-gump.svg",
+        "poster": "/static/images/posters/forrest_gump_1994.svg",
         "description": "The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold."
     }
 ]
