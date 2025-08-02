@@ -80,6 +80,204 @@ MOVIES_DATA = [
         "rating": 8.8,
         "poster": "/static/images/posters/forrest_gump_1994.svg",
         "description": "The presidencies of Kennedy and Johnson, the Vietnam War, the Watergate scandal and other historical events unfold."
+    },
+    {
+        "id": 9,
+        "title": "The Lord of the Rings: The Fellowship of the Ring",
+        "genre": ["Action", "Adventure", "Drama"],
+        "year": 2001,
+        "rating": 8.8,
+        "poster": "/static/images/placeholder.svg",
+        "description": "A meek Hobbit from the Shire and eight companions set out on a journey to destroy the powerful One Ring."
+    },
+    {
+        "id": 10,
+        "title": "Fight Club",
+        "genre": ["Drama"],
+        "year": 1999,
+        "rating": 8.8,
+        "poster": "/static/images/placeholder.svg",
+        "description": "An insomniac office worker and a devil-may-care soapmaker form an underground fight club."
+    },
+    {
+        "id": 11,
+        "title": "Goodfellas",
+        "genre": ["Biography", "Crime", "Drama"],
+        "year": 1990,
+        "rating": 8.7,
+        "poster": "/static/images/placeholder.svg",
+        "description": "The story of Henry Hill and his life in the mob, covering his relationship with his wife Karen Hill."
+    },
+    {
+        "id": 12,
+        "title": "The Silence of the Lambs",
+        "genre": ["Crime", "Drama", "Thriller"],
+        "year": 1991,
+        "rating": 8.6,
+        "poster": "/static/images/placeholder.svg",
+        "description": "A young FBI cadet must receive the help of an incarcerated and manipulative cannibal killer."
+    },
+    {
+        "id": 13,
+        "title": "The Green Mile",
+        "genre": ["Crime", "Drama", "Fantasy"],
+        "year": 1999,
+        "rating": 8.6,
+        "poster": "/static/images/placeholder.svg",
+        "description": "The lives of guards on Death Row are affected by one of their charges: a black man accused of child murder."
+    },
+    {
+        "id": 14,
+        "title": "The Departed",
+        "genre": ["Crime", "Drama", "Thriller"],
+        "year": 2006,
+        "rating": 8.5,
+        "poster": "/static/images/placeholder.svg",
+        "description": "An undercover cop and a mole in the police attempt to identify each other while infiltrating an Irish gang."
+    },
+    {
+        "id": 15,
+        "title": "The Lion King",
+        "genre": ["Animation", "Adventure", "Drama"],
+        "year": 1994,
+        "rating": 8.5,
+        "poster": "/static/images/placeholder.svg",
+        "description": "Lion prince Simba and his father are targeted by his bitter uncle, who wants to ascend the throne himself."
+    },
+    {
+        "id": 16,
+        "title": "Gladiator",
+        "genre": ["Action", "Adventure", "Drama"],
+        "year": 2000,
+        "rating": 8.5,
+        "poster": "/static/images/placeholder.svg",
+        "description": "A former Roman General sets out to exact vengeance against the corrupt emperor who murdered his family."
+    },
+    {
+        "id": 17,
+        "title": "American History X",
+        "genre": ["Crime", "Drama"],
+        "year": 1998,
+        "rating": 8.5,
+        "poster": "/static/images/placeholder.svg",
+        "description": "A former neo-nazi skinhead tries to prevent his younger brother from going down the same wrong path."
+    },
+    {
+        "id": 18,
+        "title": "The Usual Suspects",
+        "genre": ["Crime", "Drama", "Mystery"],
+        "year": 1995,
+        "rating": 8.5,
+        "poster": "/static/images/placeholder.svg",
+        "description": "A sole survivor tells of the twisty events leading up to a horrific gun battle on a boat."
+    },
+    {
+        "id": 19,
+        "title": "The Prestige",
+        "genre": ["Drama", "Mystery", "Sci-Fi"],
+        "year": 2006,
+        "rating": 8.5,
+        "poster": "/static/images/placeholder.svg",
+        "description": "After a tragic accident, two stage magicians engage in a battle to create the ultimate illusion."
+    },
+    {
+        "id": 20,
+        "title": "Casablanca",
+        "genre": ["Drama", "Romance", "War"],
+        "year": 1942,
+        "rating": 8.5,
+        "poster": "/static/images/placeholder.svg",
+        "description": "A cynical expatriate American cafe owner struggles to decide whether or not to help his former lover."
+    },
+    {
+        "id": 21,
+        "title": "The Shining",
+        "genre": ["Drama", "Horror"],
+        "year": 1980,
+        "rating": 8.4,
+        "poster": "/static/images/placeholder.svg",
+        "description": "A family heads to an isolated hotel for the winter where a sinister presence influences the father."
+    },
+    {
+        "id": 22,
+        "title": "Back to the Future",
+        "genre": ["Adventure", "Comedy", "Sci-Fi"],
+        "year": 1985,
+        "rating": 8.5,
+        "poster": "/static/images/placeholder.svg",
+        "description": "Marty McFly, a 17-year-old high school student, is accidentally sent thirty years into the past."
+    },
+    {
+        "id": 23,
+        "title": "The Terminator",
+        "genre": ["Action", "Sci-Fi"],
+        "year": 1984,
+        "rating": 8.0,
+        "poster": "/static/images/placeholder.svg",
+        "description": "A human soldier is sent from 2029 to 1984 to stop an almost indestructible cyborg killing machine."
+    },
+    {
+        "id": 24,
+        "title": "Jurassic Park",
+        "genre": ["Action", "Adventure", "Sci-Fi"],
+        "year": 1993,
+        "rating": 8.5,
+        "poster": "/static/images/placeholder.svg",
+        "description": "A pragmatic paleontologist touring an almost complete theme park on an island in Central America."
+    },
+    {
+        "id": 25,
+        "title": "Titanic",
+        "genre": ["Drama", "Romance"],
+        "year": 1997,
+        "rating": 7.9,
+        "poster": "/static/images/placeholder.svg",
+        "description": "A seventeen-year-old aristocrat falls in love with a kind but poor artist aboard the luxurious Titanic."
+    },
+    {
+        "id": 26,
+        "title": "The Avengers",
+        "genre": ["Action", "Adventure", "Sci-Fi"],
+        "year": 2012,
+        "rating": 8.0,
+        "poster": "/static/images/placeholder.svg",
+        "description": "Earth's mightiest heroes must come together and learn to fight as a team if they are going to stop the mischievous Loki."
+    },
+    {
+        "id": 27,
+        "title": "The Grand Budapest Hotel",
+        "genre": ["Adventure", "Comedy", "Crime"],
+        "year": 2014,
+        "rating": 8.1,
+        "poster": "/static/images/placeholder.svg",
+        "description": "A writer encounters the owner of an aging high-class hotel, who tells him of his early years serving as a lobby boy."
+    },
+    {
+        "id": 28,
+        "title": "La La Land",
+        "genre": ["Comedy", "Drama", "Musical"],
+        "year": 2016,
+        "rating": 8.0,
+        "poster": "/static/images/placeholder.svg",
+        "description": "While navigating their careers in Los Angeles, a pianist and an actress fall in love while attempting to reconcile their aspirations."
+    },
+    {
+        "id": 29,
+        "title": "Parasite",
+        "genre": ["Comedy", "Drama", "Thriller"],
+        "year": 2019,
+        "rating": 8.6,
+        "poster": "/static/images/placeholder.svg",
+        "description": "Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family."
+    },
+    {
+        "id": 30,
+        "title": "Joker",
+        "genre": ["Crime", "Drama", "Thriller"],
+        "year": 2019,
+        "rating": 8.4,
+        "poster": "/static/images/placeholder.svg",
+        "description": "In Gotham City, mentally troubled comedian Arthur Fleck is disregarded and mistreated by society."
     }
 ]
 
@@ -90,6 +288,10 @@ def index():
 @app.route('/debug')
 def debug():
     return render_template('debug.html')
+
+@app.route('/firebase-migration')
+def firebase_migration():
+    return render_template('firebase-migration.html')
 
 @app.route('/api/movies')
 def get_movies():
@@ -169,6 +371,13 @@ def vite_client():
     """Handle Vite client requests to prevent 404 errors"""
     # Return an empty JavaScript file with appropriate headers
     return Response('', mimetype='application/javascript')
+
+@app.route('/firebase-data-migration.js')
+def firebase_migration_js():
+    """Serve the Firebase data migration script"""
+    with open('firebase-data-migration.js', 'r') as file:
+        content = file.read()
+    return Response(content, mimetype='application/javascript')
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)

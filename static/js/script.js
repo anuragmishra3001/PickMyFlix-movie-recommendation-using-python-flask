@@ -15,15 +15,78 @@ const closeModal = document.querySelector('.close');
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
-// API base URL
-const API_BASE = '/api';
-
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
     loadAllMovies();
     setupEventListeners();
     setupNavigation();
+    initializeAuthUI();
 });
+
+// Initialize authentication UI
+async function initializeAuthUI() {
+    // DOM elements
+    const authButtons = document.getElementById('authButtons');
+    const userProfile = document.getElementById('userProfile');
+    const userEmail = document.getElementById('userEmail');
+    const loginBtn = document.getElementById('loginBtn');
+    const registerBtn = document.getElementById('registerBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
+    const loginModal = document.getElementById('loginModal');
+    const registerModal = document.getElementById('registerModal');
+    const closeLoginModal = document.getElementById('closeLoginModal');
+    const closeRegisterModal = document.getElementById('closeRegisterModal');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const loginError = document.getElementById('loginError');
+    const registerError = document.getElementById('registerError');
+    
+    // For now, show auth buttons (Firebase not configured)
+    authButtons.classList.remove('hidden');
+    userProfile.classList.add('hidden');
+    userProfile.classList.remove('flex');
+    
+    // Event listeners for auth buttons
+    loginBtn.addEventListener('click', () => {
+        loginModal.classList.remove('hidden');
+        loginError.classList.add('hidden');
+    });
+    
+    registerBtn.addEventListener('click', () => {
+        registerModal.classList.remove('hidden');
+        registerError.classList.add('hidden');
+    });
+    
+    closeLoginModal.addEventListener('click', () => {
+        loginModal.classList.add('hidden');
+    });
+    
+    closeRegisterModal.addEventListener('click', () => {
+        registerModal.classList.add('hidden');
+    });
+    
+    // Handle login form submission
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        showNotification('Login functionality will be available soon!', 'success');
+        loginModal.classList.add('hidden');
+    });
+    
+    // Handle register form submission
+    registerForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        showNotification('Registration functionality will be available soon!', 'success');
+        registerModal.classList.add('hidden');
+    });
+    
+    // Handle logout
+    logoutBtn.addEventListener('click', async () => {
+        showNotification('Logged out successfully!', 'success');
+        authButtons.classList.remove('hidden');
+        userProfile.classList.add('hidden');
+        userProfile.classList.remove('flex');
+    });
+}
 
 // Setup event listeners
 function setupEventListeners() {
@@ -116,11 +179,14 @@ function setupNavigation() {
     }
 }
 
-// Load all movies
+// Load all movies using local API
 async function loadAllMovies() {
     try {
         showLoading(moviesGrid);
-        const response = await fetch(`${API_BASE}/movies`);
+        const response = await fetch('/api/movies');
+        if (!response.ok) {
+            throw new Error('Failed to fetch movies');
+        }
         allMovies = await response.json();
         displayMovies(allMovies, moviesGrid);
     } catch (error) {
@@ -129,7 +195,7 @@ async function loadAllMovies() {
     }
 }
 
-// Perform search
+// Perform search using local API
 async function performSearch() {
     const query = searchInput.value.trim();
     if (!query) {
@@ -139,7 +205,10 @@ async function performSearch() {
 
     try {
         showLoading(searchResults);
-        const response = await fetch(`${API_BASE}/movies/search?q=${encodeURIComponent(query)}`);
+        const response = await fetch(`/api/movies/search?q=${encodeURIComponent(query)}`);
+        if (!response.ok) {
+            throw new Error('Failed to search movies');
+        }
         const movies = await response.json();
         displayMovies(movies, searchResults);
         
@@ -164,7 +233,7 @@ function toggleGenre() {
     }
 }
 
-// Get recommendations
+// Get recommendations using local API
 async function getRecommendations() {
     if (selectedGenres.length === 0) {
         alert('Please select at least one genre to get recommendations.');
@@ -174,7 +243,10 @@ async function getRecommendations() {
     try {
         showLoading(recommendationsGrid);
         const genresParam = selectedGenres.join(',');
-        const response = await fetch(`${API_BASE}/movies/recommendations?genres=${encodeURIComponent(genresParam)}`);
+        const response = await fetch(`/api/movies/recommendations?genres=${encodeURIComponent(genresParam)}`);
+        if (!response.ok) {
+            throw new Error('Failed to get recommendations');
+        }
         const recommendations = await response.json();
         displayMovies(recommendations, recommendationsGrid);
     } catch (error) {
@@ -243,13 +315,16 @@ function createMovieCard(movie) {
     `;
 }
 
-// Open movie modal
+// Open movie modal using local API
 async function openMovieModal(movieId) {
     try {
-        const response = await fetch(`${API_BASE}/movies/${movieId}`);
+        const response = await fetch(`/api/movies/${movieId}`);
+        if (!response.ok) {
+            throw new Error('Movie not found');
+        }
         const movie = await response.json();
         
-        if (movie.error) {
+        if (!movie || movie.error) {
             alert('Movie not found');
             return;
         }
@@ -354,10 +429,10 @@ function highlightStars(rating) {
     });
 }
 
-// Submit rating
+// Submit rating using local API
 async function submitRating(movieId, rating) {
     try {
-        const response = await fetch(`${API_BASE}/ratings`, {
+        const response = await fetch('/api/ratings', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -367,10 +442,9 @@ async function submitRating(movieId, rating) {
                 rating: rating
             })
         });
-
-        const result = await response.json();
         
-        if (result.message) {
+        if (response.ok) {
+            const result = await response.json();
             showNotification('Rating submitted successfully!', 'success');
         } else {
             showNotification('Failed to submit rating', 'error');

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Console</title>
+    <!-- Remove Vite client auto-injection -->
+    <script type="module">window.__vite_is_modern_browser = true;</script>
+    <script src="{{ url_for('static', filename='js/debug.js') }}"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+        }
+        #console {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            height: 300px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            font-family: monospace;
+        }
+        .error {
+            color: #ff6b6b;
+        }
+        .warning {
+            color: #feca57;
+        }
+        .info {
+            color: #54a0ff;
+        }
+        button {
+            padding: 10px 15px;
+            margin-right: 10px;
+            background-color: #4b7bec;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #3867d6;
+        }
+    </style>
+</head>
+<body>
+    <h1>JavaScript Debug Console</h1>
+    <div id="console"></div>
+    <div class="mb-4">
+        <button id="testSearch" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">Test Search API</button>
+        <button id="testRecommendations" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-2">Test Recommendations API</button>
+        <button id="testMovieModal" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded mr-2">Test Movie Modal</button>
+        <button id="testGenreSelection" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Test Genre Selection</button>
+    </div>
+    
+    <div class="mt-4">
+        <h2 class="text-xl font-bold mb-2">API Test Results</h2>
+        <pre id="apiResults" class="bg-gray-100 p-4 rounded overflow-auto max-h-60"></pre>
+        
+        <h2 class="text-xl font-bold mt-4 mb-2">DOM Test Results</h2>
+        <pre id="domResults" class="bg-gray-100 p-4 rounded overflow-auto max-h-60"></pre>
+        
+        <h2 class="text-xl font-bold mt-4 mb-2">Event Listener Test Results</h2>
+        <pre id="eventResults" class="bg-gray-100 p-4 rounded overflow-auto max-h-60"></pre>
+    </div>
+
+    <!-- Modal for movie details -->
+    <div id="movieModal" class="modal hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="modal-content bg-white p-6 rounded-lg max-w-2xl w-full max-h-screen overflow-y-auto">
+            <div class="flex justify-between items-start">
+                <h2 id="movieTitle" class="text-2xl font-bold"></h2>
+                <button id="closeModal" class="text-gray-500 hover:text-gray-700">&times;</button>
+            </div>
+            <div id="movieDetails" class="mt-4"></div>
+        </div>
+    </div>
+
+    <script>
+        const consoleOutput = document.getElementById('console');
+        
+        // Override console methods to display in our custom console
+        const originalConsole = {
+            log: console.log,
+            error: console.error,
+            warn: console.warn,
+            info: console.info
+        };
+
+        console.log = function(...args) {
+            originalConsole.log(...args);
+            appendToConsole('log', args);
+        };
+
+        console.error = function(...args) {
+            originalConsole.error(...args);
+            appendToConsole('error', args);
+        };
+
+        console.warn = function(...args) {
+            originalConsole.warn(...args);
+            appendToConsole('warning', args);
+        };
+
+        console.info = function(...args) {
+            originalConsole.info(...args);
+            appendToConsole('info', args);
+        };
+
+        function appendToConsole(type, args) {
+            const line = document.createElement('div');
+            line.className = type;
+            line.textContent = `[${type.toUpperCase()}] ${args.map(arg => 
+                typeof arg === 'object' ? JSON.stringify(arg) : arg).join(' ')}`;
+            consoleOutput.appendChild(line);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+
+        // Modal functionality for testing
+        function openMovieModal(movieId) {
+            const modal = document.getElementById('movieModal');
+            if (modal) {
+                modal.classList.remove('hidden');
+                console.log('Modal opened for movie ID:', movieId);
+            } else {
+                console.error('Movie modal element not found');
+            }
+        }
+
+        function closeMovieModal() {
+            const modal = document.getElementById('movieModal');
+            if (modal) {
+                modal.classList.add('hidden');
+                console.log('Modal closed');
+            }
+        }
+
+        // Set up close button for modal
+        const closeModalBtn = document.getElementById('closeModal');
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', closeMovieModal);
+        }
+
+        // Initial log
+        console.info('Debug console initialized');
+    </script>
+</body>
+</html>

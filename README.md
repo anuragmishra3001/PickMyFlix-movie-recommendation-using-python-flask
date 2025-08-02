@@ -1,218 +1,243 @@
 # PickMyFlix - Movie Recommendation System
 
-A modern, full-stack movie recommendation website built with HTML, CSS, JavaScript (frontend) and Python Flask (backend). Features a beautiful, mobile-responsive design with personalized movie recommendations.
+A modern, responsive movie recommendation web application built with Flask and Tailwind CSS. Get personalized movie recommendations based on your genre preferences.
 
 ## Features
 
-- 🎬 **Movie Search**: Search movies by title or genre
-- 🎯 **Personalized Recommendations**: Get movie suggestions based on your genre preferences
-- ⭐ **Movie Ratings**: Rate movies with an interactive star system
-- 📱 **Mobile Responsive**: Beautiful design that works on all devices
-- 🎨 **Modern UI**: Clean, modern interface with smooth animations
-- 🔍 **Real-time Search**: Instant search results as you type
+- 🎬 **Movie Database**: Browse through a curated collection of 30+ popular movies
+- 🔍 **Smart Search**: Search movies by title or genre
+- 🎯 **Personalized Recommendations**: Get movie suggestions based on your favorite genres
+- ⭐ **Rating System**: Rate movies and see community ratings
+- 📱 **Responsive Design**: Beautiful UI that works on all devices
+- 🎨 **Modern Interface**: Sleek design with animations and gradients
 
 ## Tech Stack
 
-### Frontend
-- **HTML5**: Semantic markup
-- **CSS3**: Modern styling with Flexbox and Grid
-- **JavaScript (ES6+)**: Interactive functionality
-- **Font Awesome**: Icons
-- **Google Fonts**: Inter font family
+- **Backend**: Flask (Python)
+- **Frontend**: HTML5, CSS3, JavaScript
+- **Styling**: Tailwind CSS
+- **Icons**: Font Awesome
+- **Animations**: Animate.css
 
-### Backend
-- **Python 3.8+**: Server-side logic
-- **Flask**: Web framework
-- **Flask-CORS**: Cross-origin resource sharing
+## Quick Start
+
+### Local Development
+
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd movie-recommendation-system
+   ```
+
+2. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Run the application**
+   ```bash
+   python app.py
+   ```
+
+4. **Open your browser**
+   Navigate to `http://localhost:5000`
+
+### Testing the API
+
+Run the test script to verify all endpoints work:
+```bash
+python test_api.py
+```
+
+## Deployment
+
+### Vercel Deployment
+
+1. **Install Vercel CLI**
+   ```bash
+   npm install -g vercel
+   ```
+
+2. **Deploy to Vercel**
+   ```bash
+   vercel
+   ```
+
+3. **Follow the prompts** to connect your GitHub repository
+
+The `vercel.json` file is already configured for Flask deployment.
+
+### Other Platforms
+
+This Flask app can be deployed on any platform that supports Python:
+
+- **Heroku**: Add a `Procfile` with `web: python app.py`
+- **Railway**: Connect your GitHub repo
+- **Render**: Deploy as a web service
+- **DigitalOcean App Platform**: Deploy directly from GitHub
+
+## API Endpoints
+
+### Movies
+- `GET /api/movies` - Get all movies
+- `GET /api/movies/search?q=<query>` - Search movies by title or genre
+- `GET /api/movies/recommendations?genres=<genre1,genre2>` - Get recommendations based on genres
+- `GET /api/movies/<id>` - Get a specific movie by ID
+
+### Ratings
+- `POST /api/ratings` - Add a movie rating
+  ```json
+  {
+    "movie_id": 1,
+    "rating": 5
+  }
+  ```
+
+## Movie Database
+
+The application includes 30 popular movies across various genres:
+
+- **Action**: The Dark Knight, The Matrix, Gladiator, The Avengers
+- **Drama**: The Shawshank Redemption, The Godfather, Forrest Gump
+- **Sci-Fi**: Inception, Interstellar, The Matrix, Back to the Future
+- **Crime**: Pulp Fiction, Goodfellas, The Silence of the Lambs
+- **Comedy**: The Grand Budapest Hotel, La La Land, Parasite
+- **Adventure**: The Lord of the Rings, Jurassic Park, Back to the Future
+- **Romance**: Titanic, Casablanca, La La Land
+- **Horror**: The Shining
+- **Animation**: The Lion King
 
 ## Project Structure
 
 ```
-Movie Recommendation system/
-├── app.py                 # Flask backend application
+├── app.py                 # Main Flask application
 ├── requirements.txt       # Python dependencies
-├── README.md             # Project documentation
+├── vercel.json           # Vercel deployment configuration
+├── test_api.py           # API testing script
 ├── templates/
 │   └── index.html        # Main HTML template
-└── static/
-    ├── css/
-    │   └── style.css     # Stylesheets
-    └── js/
-        └── script.js     # JavaScript functionality
+├── static/
+│   ├── css/
+│   │   └── style.css     # Custom CSS styles
+│   ├── js/
+│   │   ├── script.js     # Main JavaScript functionality
+│   │   └── firebase-config.js  # Firebase configuration (commented out)
+│   └── images/
+│       ├── posters/      # Movie poster images
+│       └── placeholder.svg  # Default poster placeholder
+└── README.md             # This file
 ```
-
-## Installation & Setup
-
-### Prerequisites
-- Python 3.8 or higher
-- pip (Python package installer)
-
-### Step 1: Clone or Download
-Download the project files to your local machine.
-
-### Step 2: Install Dependencies
-Open a terminal/command prompt in the project directory and run:
-
-```bash
-pip install -r requirements.txt
-```
-
-### Step 3: Run the Application
-Start the Flask development server:
-
-```bash
-python app.py
-```
-
-### Step 4: Access the Application
-Open your web browser and navigate to:
-```
-http://localhost:5000
-```
-
-## Usage
-
-### Home Page
-- View the hero section with animated floating movie cards
-- Click "Get Recommendations" to jump to the recommendations section
-
-### Search Movies
-- Use the search bar to find movies by title or genre
-- Results update in real-time as you type
-
-### All Movies
-- Browse all available movies in a responsive grid
-- Click on any movie card to view details
-
-### Recommendations
-- Select your favorite genres from the available options
-- Click "Get Recommendations" to receive personalized movie suggestions
-- The system matches movies based on your genre preferences
-
-### Movie Details
-- Click on any movie card to open a detailed modal
-- View movie information including description and genres
-- Rate movies using the interactive star rating system
-
-## API Endpoints
-
-The backend provides the following REST API endpoints:
-
-- `GET /api/movies` - Get all movies
-- `GET /api/movies/search?q=<query>` - Search movies
-- `GET /api/movies/recommendations?genres=<genres>` - Get recommendations
-- `GET /api/movies/<id>` - Get specific movie
-- `POST /api/ratings` - Submit movie rating
 
 ## Features in Detail
 
-### Responsive Design
-- Mobile-first approach
-- Hamburger menu for mobile devices
-- Flexible grid layouts
-- Touch-friendly interface
+### 1. Movie Browsing
+- View all movies in a responsive grid layout
+- Each movie card shows title, year, rating, and genres
+- Click on any movie to see detailed information
 
-### Search Functionality
-- Real-time search results
+### 2. Search Functionality
 - Search by movie title or genre
-- Case-insensitive matching
-- Clear visual feedback
+- Real-time results as you type
+- No results message for empty searches
 
-### Recommendation Engine
-- Genre-based matching algorithm
-- Multiple genre selection
-- Personalized suggestions
-- Fallback to random movies if no preferences
+### 3. Recommendations
+- Select your favorite genres from the available options
+- Get personalized movie recommendations
+- Recommendations are scored based on genre matches
 
-### Interactive Elements
-- Hover effects on movie cards
-- Smooth animations and transitions
-- Modal dialogs for movie details
-- Star rating system
+### 4. Movie Details
+- Detailed view with full description
+- Star rating system (1-5 stars)
+- Responsive modal design
 
-### User Experience
-- Loading spinners for async operations
-- Error handling with user-friendly messages
-- Success notifications
-- Smooth scrolling navigation
+### 5. Responsive Design
+- Mobile-first approach
+- Hamburger menu for mobile navigation
+- Optimized for all screen sizes
 
 ## Customization
 
-### Adding More Movies
-Edit the `MOVIES_DATA` list in `app.py` to add more movies:
+### Adding New Movies
+
+To add new movies, edit the `MOVIES_DATA` list in `app.py`:
 
 ```python
 {
-    "id": 9,
+    "id": 31,
     "title": "Your Movie Title",
     "genre": ["Action", "Adventure"],
     "year": 2024,
     "rating": 8.5,
-    "poster": "https://via.placeholder.com/300x450/color/ffffff?text=Title",
+    "poster": "/static/images/posters/your_movie.svg",
     "description": "Movie description here."
 }
 ```
 
-### Styling Changes
-Modify `static/css/style.css` to customize:
-- Color scheme
-- Typography
-- Layout spacing
-- Animations
+### Styling
 
-### Adding Features
-Extend the functionality by:
-- Adding user authentication
-- Implementing a database for persistent storage
-- Adding more sophisticated recommendation algorithms
-- Including movie trailers or external links
+The application uses Tailwind CSS for styling. You can customize:
 
-## Browser Support
+- Colors in the Tailwind config in `index.html`
+- Custom CSS in `static/css/style.css`
+- Animations and transitions
 
-- Chrome (recommended)
-- Firefox
-- Safari
-- Edge
+### Firebase Integration (Optional)
+
+The app includes Firebase configuration files for future authentication and database features. To enable:
+
+1. Set up a Firebase project
+2. Update `static/js/firebase-config.js` with your credentials
+3. Uncomment Firebase scripts in `index.html`
+4. Update `static/js/script.js` to use Firebase functions
 
 ## Troubleshooting
 
 ### Common Issues
 
 1. **Port already in use**
-   - Change the port in `app.py`: `app.run(debug=True, host='0.0.0.0', port=5001)`
+   ```bash
+   # Kill the process using port 5000
+   lsof -ti:5000 | xargs kill -9
+   ```
 
-2. **CORS errors**
-   - Ensure Flask-CORS is properly installed
-   - Check that the API base URL in `script.js` matches your server
+2. **Module not found errors**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-3. **Static files not loading**
-   - Verify the file structure matches the expected layout
-   - Check that Flask is serving static files correctly
+3. **Vercel deployment fails**
+   - Ensure `vercel.json` is in the root directory
+   - Check that `app.py` is the main file
+   - Verify all dependencies are in `requirements.txt`
 
-4. **Search not working**
-   - Ensure the backend is running
-   - Check browser console for JavaScript errors
-   - Verify API endpoints are accessible
+### API Testing
+
+If you encounter issues with the API:
+
+1. Run the test script: `python test_api.py`
+2. Check the Flask server logs for errors
+3. Verify all endpoints return 200 status codes
 
 ## Contributing
 
-Feel free to contribute to this project by:
-- Adding new features
-- Improving the UI/UX
-- Optimizing performance
-- Adding more movies to the database
-- Enhancing the recommendation algorithm
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
 
 ## License
 
-This project is open source and available under the MIT License.
+This project is open source and available under the [MIT License](LICENSE).
 
-## Acknowledgments
+## Support
 
-- Font Awesome for icons
-- Google Fonts for typography
-- Flask community for the web framework
-- Placeholder.com for demo images
+If you encounter any issues or have questions:
+
+1. Check the troubleshooting section above
+2. Review the API documentation
+3. Test the endpoints using `test_api.py`
+4. Open an issue on GitHub
 
 ---
 
